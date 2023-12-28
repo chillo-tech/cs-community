@@ -117,10 +117,9 @@ const makeSuggestion = async (req: Request, res: Response) => {
       description: suggest.description,
     };
 
-    // https://contacts.chillo.fr/items/contact?access_token=pvcLJOKCj3dzxdb9pML7XZ9kgJJkOdhn
     const client = createDirectus('https://contacts.chillo.fr')
       .with(rest())
-      .with(staticToken('pvcLJOKCj3dzxdb9pML7XZ9kgJJkOdhn'));
+      .with(staticToken(process.env.DIRECTUS_API_KEY || ''));
 
     // console.log('client', client.url.toString());
     client
