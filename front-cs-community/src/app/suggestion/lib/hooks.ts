@@ -1,13 +1,12 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
-import { apiUri, token } from "./constants";
 import { formSchema } from "./formSchema";
 import { FormEvent } from "react";
+import axios from "axios";
 
 export const useFn = () => {
   const mutation = useMutation(postSuggestion, {
@@ -18,11 +17,7 @@ export const useFn = () => {
 
   async function postSuggestion(obj: any) {
     try {
-      const res = await axios.post(apiUri + "/suggest", obj, {
-        headers: {
-          Authorization: token,
-        },
-      });
+      const res = await axios.post("/suggest", obj);
       toast.success("success, you will recieve a confirmation via email");
     } catch (err: any) {
       console.log("err", err);
