@@ -1,0 +1,12 @@
+{
+  "author": {
+    "name": "John DOE",
+    "email": "johndoe@gmail.com",
+    "tag": ["Student"],
+    "phoneIndex": 123,
+    "phone": 123456789
+  },
+  "title": "A new feature in Js you should learn",
+  "about": "about JS Proxies",
+  "comment": "lorem ipsum dolor sit amet. Et consectur!"
+}

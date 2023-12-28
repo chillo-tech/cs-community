@@ -1,0 +1,97 @@
+.container {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+}
+
+body:has(.container)::-webkit-scrollbar{
+  display: none;
+}
+
+
+
+.container > main {
+  display: grid;
+  max-width: 500px;
+  margin: 15px auto;
+}
+
+.container > form > * {
+  min-height: 35px;
+}
+
+.container > * {
+}
+.container > header {
+  color: rgb(53, 53, 53);
+  color: wheat;
+  height: fit-content;
+
+  p {
+    text-align: center;
+    max-width: 70vw;
+  }
+  h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.form {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(2, 1fr);
+  // grid-auto-rows: 35px;
+}
+
+.inputLarge {
+  grid-column: 1 / -1;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 60px;
+  grid-column: 1 / -1;
+}
+
+.submitButton {
+  height: 45px;
+  padding: 0 44px;
+  margin: 14px auto;
+  justify-self: center;
+  background: #202020;
+  color: rgb(231, 231, 231);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all ease 300ms;
+}
+
+.submitButton:hover {
+  background: #000000;
+}
+
+@media (max-width: 501px) {
+  .form {
+    gap: 8px;
+    grid-template-columns: 1fr;
+    min-width: 85vw;
+  }
+  .container > header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
