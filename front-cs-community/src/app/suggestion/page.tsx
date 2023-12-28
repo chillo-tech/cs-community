@@ -1,23 +1,13 @@
 "use client";
 
+import Footer from "@/app/suggestion/components/footer";
+import NavBar from "@/app/suggestion/components/navbar";
 import { useFn } from "@/app/suggestion/lib/hooks";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-} from "@mui/material";
-import TextField from "@mui/material/TextField";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { MenuProps } from "./lib/constants";
+import GoWhatsappBtn from "./components/goWhatsapp";
 import { civilities, phoneIndexes, tags } from "./lib/mockdata";
 import styles from "./page.module.scss";
-import NavBar from "@/app/suggestion/components/navbar";
-import Footer from "@/app/suggestion/components/footer";
-import Link from "next/link";
-import GoWhatsappBtn from "./components/goWhatsapp";
 
 const queryClient = new QueryClient();
 
@@ -45,161 +35,144 @@ export default function Home() {
 }
 
 const Main = () => {
-  const {
-    handleChangeByTagName,
-    handleChangeByTagNameAuthor,
-    handleSubmit,
-    handleChangeTag,
-    handlePhoneIndex,
-    handleCivility,
-    suggestion,
-  } = useFn();
+  const { onSubmit, errors, register } = useFn();
   return (
     <main>
-      <form className={styles.form}>
-        <TextField
-          size="small"
-          label="Nom"
-          className={styles.inputLarge}
-          variant="outlined"
-          value={suggestion?.author.name}
-          placeholder="Please enter your name here"
-          onChange={handleChangeByTagNameAuthor}
-          name="author.name"
-        />
-        <TextField
-          size="small"
-          label="Email"
-          variant="outlined"
-          className={styles.inputLarge}
-          type="email"
-          value={suggestion?.author.email}
-          placeholder="Please enter your email here"
-          onChange={handleChangeByTagNameAuthor}
-          name="author.email"
-        />
+      <form className={styles.form} onSubmit={onSubmit}>
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Nom</label>
 
-        <FormControl>
-          <InputLabel
-            id="demo-multiple-name-label"
-            sx={{ position: "absolute", left: 0, top: -6 }}
-          >
-            Index Telephonique
-          </InputLabel>
-          <Select
-            size="small"
-            value={suggestion.author.phoneIndex}
-            onChange={handlePhoneIndex}
-            input={<OutlinedInput label="Index Telephonique" size="small" />}
-            MenuProps={MenuProps}
-            // sx={{ width: "100%" }}
-          >
+          <input
+            {...register("nom")}
+            type="text"
+            placeholder="svp entrez votre nom"
+          />
+          <p className={styles.errorMessage}>
+            {errors?.nom && "Veuillez entrer votre nom"}
+          </p>
+        </div>
+
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Email</label>
+          <input
+            type="email"
+            {...register("email")}
+            placeholder="svp entrez votre email"
+          />
+          <p className={styles.errorMessage}>
+            {errors?.email && "Veuillez entrer votre email"}
+          </p>
+        </div>
+
+        <div className={styles.formControl}>
+          <label>Index Telephonique</label>
+          <select {...register("phoneIndex")}>
+            <option value={""}>Selectionnez</option>
             {phoneIndexes.map((phoneIndex, idx) => (
-              <MenuItem key={phoneIndex + idx} value={phoneIndex}>
+              <option key={phoneIndex + idx} value={phoneIndex}>
                 {phoneIndex}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </FormControl>
-        <TextField
-          size="small"
-          label="numero de Telephone"
-          variant="outlined"
-          type="number"
-          value={suggestion?.author.phone}
-          placeholder="Please enter your phone number here"
-          onChange={handleChangeByTagNameAuthor}
-          name="author.phone"
-          aria-valuemin={1}
-        />
-        <FormControl className={styles.inputLarge}>
-          <InputLabel
-            id="demo-multiple-name-label"
-            sx={{ position: "absolute", left: 0, top: -6 }}
-          >
-            Tag
-          </InputLabel>
-          <Select
-            size="small"
-            value={suggestion.author.tag[0] || ""}
-            onChange={handleChangeTag}
-            input={<OutlinedInput label="Tag" size="small" />}
-            MenuProps={MenuProps}
-          >
+          </select>
+        </div>
+
+        <div className={styles.formControl}>
+          <label>numero de Telephone</label>
+          <input
+            {...register("phone")}
+            type="number"
+            placeholder="svp entrez votre numero"
+          />
+        </div>
+        <p className={styles.errorMessageBottom}>
+          {errors?.phoneIndex && "Veuillez entrer index telephonique"}
+        </p>
+        <p className={styles.errorMessageBottom}>
+          {errors?.phone && "Veuillez entrer numero de telephone"}
+        </p>
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Tag</label>
+          <select {...register("tag")}>
+            <option value={""}>Selectionnez un Tag</option>
             {tags.map((tag, idx) => (
-              <MenuItem key={tag + idx} value={tag}>
+              <option key={tag + idx} value={tag}>
                 {tag}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </FormControl>
-        <FormControl className={styles.inputLarge}>
-          <InputLabel
-            id="demo-multiple-name-label"
-            sx={{ position: "absolute", left: 0, top: -6 }}
-          >
-            Civilite
-          </InputLabel>
-          <Select
-            size="small"
-            value={suggestion.author.civility}
-            onChange={handleCivility}
-            input={<OutlinedInput label="Civilite" size="small" />}
-            MenuProps={MenuProps}
-          >
+          </select>
+          <p className={styles.errorMessage}>
+            {errors?.tag && "Veuillez selectionner un tag"}
+          </p>
+        </div>
+
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Civilite</label>
+          <select {...register("civility")}>
+            <option value={""}>Selectionnez une Civilite</option>
             {civilities.map((civility, idx) => (
-              <MenuItem key={civility + idx} value={civility}>
+              <option key={civility + idx} value={civility}>
                 {civility}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </FormControl>
+          </select>
+          <p className={styles.errorMessage}>
+            {errors?.civility && "Veuillez selectionner une civilite"}
+          </p>
+        </div>
 
-        <TextField
-          size="small"
-          className={styles.inputLarge}
-          label="Age"
-          variant="outlined"
-          type="number"
-          value={suggestion?.author.age}
-          placeholder="Please enter your age here"
-          onChange={handleChangeByTagNameAuthor}
-          name="author.age"
-          aria-valuemin={1}
-        />
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Age</label>
+          <input
+            type="number"
+            placeholder="Svp entrez votre age"
+            {...register("age")}
+          />
+          <p className={styles.errorMessage}>
+            {errors?.age && "Veuillez entrer votre age"}
+          </p>
+        </div>
 
-        <TextField
-          size="small"
-          label="Titre"
-          variant="outlined"
-          placeholder="Please enter the title of the video here"
-          name="title"
-          onChange={handleChangeByTagName}
-          className={styles.inputLarge}
-          value={suggestion.title}
-        />
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Titre</label>
+          <input
+            type="text"
+            placeholder="Entrez le titre de la video"
+            {...register("title")}
+          />
+          <p className={styles.errorMessage}>
+            {errors?.title && "Veuillez entrer un titre"}
+          </p>
+        </div>
 
-        <TextField
-          // size="small"
-          multiline
-          minRows={4}
-          maxRows={6}
-          className={styles.inputLarge}
-          label="description"
-          variant="outlined"
-          placeholder="Please enter a description here here"
-          name="description"
-          onChange={handleChangeByTagName}
-          value={suggestion.description}
-        />
+        <div className={styles.inputLarge + " " + styles.formControl}>
+          <label>Description</label>
+          <textarea
+            placeholder="Entrez la description"
+            {...register("description")}
+            rows={4}
+          />
+          <p className={styles.errorMessage}>
+            {errors?.description && "Veuillez entrer une description"}
+          </p>
+        </div>
+        <button
+          type="submit"
+          className={
+            styles.submitButton +
+            " text-center flex mx-auto h-fit py-2 mt-1 justify-items-center items-center bg-blue-600 shadow-sm rounded-lg px-4"
+          }
+        >
+          <span className="font-extralight text-xl text-white "> SUBMIT</span>
+        </button>
       </form>
       {/* <button className={styles.submitButton}>submit</button> */}
-      <button
-        onClick={handleSubmit}
+      {/* <button
+        // onClick={handleSubmit}
+        type="submit"
         className="text-center flex mx-auto h-fit py-2 mt-1 justify-items-center items-center bg-blue-600 shadow-sm rounded-lg px-4"
       >
-          <span className="font-extralight text-xl text-white "> SUBMIT</span>
-      </button>
+        <span className="font-extralight text-xl text-white "> SUBMIT</span>
+      </button> */}
     </main>
   );
 };

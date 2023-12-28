@@ -22,7 +22,7 @@ const Footer = () => {
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 448 512"
                   color="text-slate-300"
                   className="pr-3 text-5xl cursor-pointer font-extralight"
@@ -68,7 +68,7 @@ const Footer = () => {
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
-                    stroke-width="0"
+                    strokeWidth="0"
                     viewBox="0 0 448 512"
                     color="text-slate-300"
                     className="px-3 text-6xl"
@@ -83,7 +83,7 @@ const Footer = () => {
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
-                    stroke-width="0"
+                    strokeWidth="0"
                     viewBox="0 0 448 512"
                     className="px-3 text-6xl"
                     height="1em"
@@ -97,7 +97,7 @@ const Footer = () => {
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
-                    stroke-width="0"
+                    strokeWidth="0"
                     viewBox="0 0 512 512"
                     className="px-3 text-6xl"
                     height="1em"
@@ -111,7 +111,7 @@ const Footer = () => {
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
-                    stroke-width="0"
+                    strokeWidth="0"
                     viewBox="0 0 448 512"
                     className="px-3 text-6xl"
                     height="1em"

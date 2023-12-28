@@ -145,7 +145,7 @@ const makeSuggestion = async (req: Request, res: Response) => {
     mailingService.send(mailOptions);
 
     const mailingOptions2 = {
-      to: 'acceuil@chillo.tech',
+      to: 'brightefoo@gmail.com',
       subject: 'Nouvelle suggestion de contenu!',
       text: msg2(suggest.author?.name, suggest.title),
     };

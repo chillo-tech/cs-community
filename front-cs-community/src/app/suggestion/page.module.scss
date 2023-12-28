@@ -1,23 +1,37 @@
 .container {
   display: grid;
-  height: 100%;
   grid-template-rows: auto 1fr;
 }
 
-body:has(.container)::-webkit-scrollbar{
-  display: none;
+.formControl {
+  position: relative;
+  display: grid;
+  & > * {
+    outline: none;
+  }
+
+  & > :nth-child(2) {
+    height: 35px;
+    border: 1px solid rgb(218, 218, 218);
+    padding-left: 10px;
+    border-radius: 3px;
+  }
+
+  & > textarea:nth-child(2) {
+    height: 80px;
+    resize: none;
+  }
 }
 
-
+body:has(.container)::-webkit-scrollbar {
+  display: none;
+}
 
 .container > main {
   display: grid;
   max-width: 500px;
   margin: 15px auto;
-}
-
-.container > form > * {
-  min-height: 35px;
+  padding: 25px 8px 40px;
 }
 
 .container > * {
@@ -65,24 +79,28 @@ body:has(.container)::-webkit-scrollbar{
 }
 
 .submitButton {
-  height: 45px;
-  padding: 0 44px;
-  margin: 14px auto;
-  justify-self: center;
-  background: #202020;
-  color: rgb(231, 231, 231);
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 16px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all ease 300ms;
+  grid-column: 1/-1;
 }
 
-.submitButton:hover {
-  background: #000000;
+.errorMessage {
+  color: red;
+  position: absolute;
+  right: 0;
+  top: 5px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-style: italic;
 }
+
+.errorMessageBottom {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-style: italic;
+}
+// .submitButton:hover {
+//   background: #000000;
+// }
 
 @media (max-width: 501px) {
   .form {
