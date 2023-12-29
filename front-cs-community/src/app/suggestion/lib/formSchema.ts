@@ -8,7 +8,6 @@ export const formSchema = yup.object().shape({
   phone: yup.number().min(1).required(),
   tag: yup.string().oneOf(tags).required(),
   civility: yup.string().required(),
-  age: yup.number().min(1).required(),
   description: yup.string().required(),
   title: yup.string().required(),
 });

@@ -4,7 +4,6 @@ export const suggestSchema = new Schema({
   author: {
     name: String,
     email: String,
-    age : Number,
     civility : String,
     tag: [String],
     phoneIndex: Number,

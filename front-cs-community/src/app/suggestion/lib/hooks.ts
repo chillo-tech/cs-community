@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { formSchema } from "./formSchema";
 import { FormEvent } from "react";
-import axios from "axios";
+import axios from "./axios";
 
 export const useFn = () => {
   const mutation = useMutation(postSuggestion, {

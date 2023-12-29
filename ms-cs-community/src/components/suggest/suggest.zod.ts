@@ -15,7 +15,6 @@ class SuggestZodSchema {
         phoneIndex: number(),
         phone: number(),
         civility: string(),
-        age: number(),
       }),
       title: string({
         required_error: 'Title is required',

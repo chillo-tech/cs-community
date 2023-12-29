@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import GoWhatsappBtn from "./components/goWhatsapp";
 import { civilities, phoneIndexes, tags } from "./lib/mockdata";
 import styles from "./page.module.scss";
+import CountrySelect from "./components/countrySelect";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,7 @@ export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
-      <NavBar />
+      {/* <NavBar /> */}
 
       <div className={styles.container}>
         <header className="bg-gradient-to-r from-blue-700 via-blue-400 to-green-500 py-12">
@@ -28,8 +29,8 @@ export default function Home() {
         <Main />
       </div>
 
-      <Footer />
-      <GoWhatsappBtn />
+      {/* <Footer /> */}
+      {/* <GoWhatsappBtn /> */}
     </QueryClientProvider>
   );
 }
@@ -40,12 +41,12 @@ const Main = () => {
     <main>
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.inputLarge + " " + styles.formControl}>
-          <label>Nom</label>
+          <label>Votre nom</label>
 
           <input
             {...register("nom")}
             type="text"
-            placeholder="svp entrez votre nom"
+            placeholder="Svp entrez votre nom"
           />
           <p className={styles.errorMessage}>
             {errors?.nom && "Veuillez entrer votre nom"}
@@ -53,11 +54,11 @@ const Main = () => {
         </div>
 
         <div className={styles.inputLarge + " " + styles.formControl}>
-          <label>Email</label>
+          <label>Votre email</label>
           <input
             type="email"
             {...register("email")}
-            placeholder="svp entrez votre email"
+            placeholder="Svp entrez votre email"
           />
           <p className={styles.errorMessage}>
             {errors?.email && "Veuillez entrer votre email"}
@@ -67,10 +68,16 @@ const Main = () => {
         <div className={styles.formControl}>
           <label>Index Telephonique</label>
           <select {...register("phoneIndex")}>
-            <option value={""}>Selectionnez</option>
+            {/* <option {...{ ["data-countrycode"]: "FR" }} value={""}>
+              Selectionnez
+            </option> */}
             {phoneIndexes.map((phoneIndex, idx) => (
-              <option key={phoneIndex + idx} value={phoneIndex}>
-                {phoneIndex}
+              <option
+                {...{ ["data-countrycode"]: phoneIndex["data-countrycode"] }}
+                key={phoneIndex.value + phoneIndex["data-countrycode"] + idx}
+                value={phoneIndex.value}
+              >
+                {phoneIndex.text}
               </option>
             ))}
           </select>
@@ -91,9 +98,11 @@ const Main = () => {
           {errors?.phone && "Veuillez entrer numero de telephone"}
         </p>
         <div className={styles.inputLarge + " " + styles.formControl}>
-          <label>Tag</label>
+          <label>Vous etes...</label>
           <select {...register("tag")}>
-            <option value={""}>Selectionnez un Tag</option>
+            <option value={""}>
+              Selectionnez ce qui vous represente le plus
+            </option>
             {tags.map((tag, idx) => (
               <option key={tag + idx} value={tag}>
                 {tag}
@@ -101,14 +110,14 @@ const Main = () => {
             ))}
           </select>
           <p className={styles.errorMessage}>
-            {errors?.tag && "Veuillez selectionner un tag"}
+            {errors?.tag && "Veuillez nous indiquer ce que vous etes."}
           </p>
         </div>
 
         <div className={styles.inputLarge + " " + styles.formControl}>
           <label>Civilite</label>
           <select {...register("civility")}>
-            <option value={""}>Selectionnez une Civilite</option>
+            <option value={""}>Civilite</option>
             {civilities.map((civility, idx) => (
               <option key={civility + idx} value={civility}>
                 {civility}
@@ -120,7 +129,7 @@ const Main = () => {
           </p>
         </div>
 
-        <div className={styles.inputLarge + " " + styles.formControl}>
+        {/* <div className={styles.inputLarge + " " + styles.formControl}>
           <label>Age</label>
           <input
             type="number"
@@ -130,13 +139,14 @@ const Main = () => {
           <p className={styles.errorMessage}>
             {errors?.age && "Veuillez entrer votre age"}
           </p>
-        </div>
+        </div> */}
+        {/* <CountrySelect /> */}
 
         <div className={styles.inputLarge + " " + styles.formControl}>
-          <label>Titre</label>
+          <label>Quel est le titre de votre vidéo</label>
           <input
             type="text"
-            placeholder="Entrez le titre de la video"
+            placeholder="Entrez le titre de la vidéo"
             {...register("title")}
           />
           <p className={styles.errorMessage}>
@@ -145,7 +155,7 @@ const Main = () => {
         </div>
 
         <div className={styles.inputLarge + " " + styles.formControl}>
-          <label>Description</label>
+          <label>Qu'attendez vous de voir dans cette vidéo ?</label>
           <textarea
             placeholder="Entrez la description"
             {...register("description")}
@@ -165,14 +175,6 @@ const Main = () => {
           <span className="font-extralight text-xl text-white "> SUBMIT</span>
         </button>
       </form>
-      {/* <button className={styles.submitButton}>submit</button> */}
-      {/* <button
-        // onClick={handleSubmit}
-        type="submit"
-        className="text-center flex mx-auto h-fit py-2 mt-1 justify-items-center items-center bg-blue-600 shadow-sm rounded-lg px-4"
-      >
-        <span className="font-extralight text-xl text-white "> SUBMIT</span>
-      </button> */}
     </main>
   );
 };
